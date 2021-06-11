@@ -9,7 +9,7 @@ driver.get("http://www.google.com");
 driver.findElement(By.name("q")).sendKeys("webdriver");
 
 driver.sleep(1000).then(function () {
-  driver.findElement(By.name("q")).sendKeys(webdriver.Key.ENTER);
+  driver.findElement(By.name("q")).sendKeys(webdriver.Key.RETURN);
 });
 
 driver.sleep(2000).then(function () {
