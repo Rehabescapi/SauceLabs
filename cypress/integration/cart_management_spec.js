@@ -4,36 +4,47 @@
  * Verify that the “Test.allTheThings” shirt is available for purchase
  */
 
-describe("Basic Cart Management", () => {
-  it("Able to confirm that Items can be added and removed from the cart.", () => {
-    cy.visit("https://www.saucedemo.com/");
-    cy.get("[data-test=username]").type("standard_user");
-    cy.get("[data-test=password]").type("secret_sauce");
-    cy.get("[data-test=login-button]").click();
-    cy.url().should("eq", "https://www.saucedemo.com/inventory.html");
+const { fillLogin, Users } = require("./utils");
 
-    //
-    cy.get("[data-test=add-to-cart-sauce-labs-backpack]")
-      .should("be.visible")
-      .click();
-    cy.get("[data-test=remove-sauce-labs-backpack]")
-      .should("be.visible")
-      .click();
+describe("Basic Cart Management", () => {
+  Users.forEach((example) => {
+    it("Able to confirm that Items can be added and removed from the cart.", () => {
+      cy.visit("https://www.saucedemo.com/");
+      fillLogin(example.name);
+      //
+      cy.get("[data-test=add-to-cart-sauce-labs-backpack]")
+        .should("be.visible")
+        .click();
+      cy.get(".shopping_cart_badge").should("contain.text", "1");
+
+      cy.get("[data-test=remove-sauce-labs-backpack]")
+        .should("be.visible")
+        .click();
+
+      cy.get(".shopping_cart_badge").should("not.exist");
+    });
+
+    it("Able to confirm that Items can be added from the cart.", () => {
+      cy.visit("https://www.saucedemo.com/");
+      fillLogin(example.name);
+      //
+      cy.get("[data-test=add-to-cart-sauce-labs-backpack]")
+        .should("be.visible")
+        .click();
+      cy.get(".shopping_cart_badge").should("contain.text", "1");
+    });
   });
 });
 
 describe('As a user I can ensure that the "All the Things shirt" is visible', () => {
-  it.only("is able to use Basic Login", () => {
-    cy.visit("https://www.saucedemo.com/");
-    cy.get("[data-test=username]").type("standard_user");
-    cy.get("[data-test=password]").type("secret_sauce");
-    cy.get("[data-test=login-button]").click();
-    cy.url().should("eq", "https://www.saucedemo.com/inventory.html");
-    /*  cy.get("#item_3_title_link > .inventory_item_name").contains(
-      "Test.allTheThings()"
-    );*/
-    cy.get("#item_3_title_link > .inventory_item_name").should(($lis) => {
-      expect($lis).to.contain("Test.allTheThings()");
+  Users.forEach((example) => {
+    it("is able to use Basic Login and confirm", () => {
+      cy.visit("https://www.saucedemo.com/");
+      fillLogin(example.name);
+
+      cy.get("#item_3_title_link > .inventory_item_name").should(($lis) => {
+        expect($lis).to.contain("Test.allTheThings()");
+      });
     });
   });
 });
