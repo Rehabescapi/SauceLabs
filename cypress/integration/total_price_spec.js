@@ -1,4 +1,4 @@
-const { fillLogin, Users, fillStep1 } = require("./utils");
+const { fillLogin, Users, fillStep1 } = require("../fixtures/utils");
 
 describe("Total Price Verification", () => {
   Users.forEach((example) => {

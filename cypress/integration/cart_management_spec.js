@@ -4,7 +4,7 @@
  * Verify that the “Test.allTheThings” shirt is available for purchase
  */
 
-const { fillLogin, Users } = require("./utils");
+const { fillLogin, Users } = require("../fixtures/utils");
 
 describe("Basic Cart Management", () => {
   Users.forEach((example) => {
