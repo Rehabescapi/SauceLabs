@@ -9,9 +9,6 @@
   },
   "author": "Jason Lehmann",
   "license": "ISC",
-  "dependencies": {
-    "selenium-webdriver": "^4.0.0-beta.4"
-  },
   "devDependencies": {
     "cypress": "^7.5.0"
   }

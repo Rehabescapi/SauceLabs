@@ -1,4 +1,4 @@
-import { fillLogin, fillStep1, Users } from "./utils";
+import { fillLogin, fillStep1, fillCartInventory, Users } from "./utils";
 /**
  * Verify that the Pony Express image appears after a successful purchase
  */
@@ -14,10 +14,7 @@ describe("Fully Purchase ", () => {
         .click();
 
       //Part 2
-      cy.url().should("eq", "https://www.saucedemo.com/inventory.html");
-      cy.get(".shopping_cart_link").click();
-      cy.url().should("eq", "https://www.saucedemo.com/cart.html");
-      cy.get("[data-test=checkout]").click();
+      fillCartInventory();
 
       fillStep1();
 

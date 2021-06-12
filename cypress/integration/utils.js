@@ -6,6 +6,13 @@ export const fillStep1 = () => {
   cy.get("[data-test=continue]").click();
 };
 
+export const fillCartInventory = () => {
+  cy.url().should("eq", "https://www.saucedemo.com/inventory.html");
+  cy.get(".shopping_cart_link").click();
+  cy.url().should("eq", "https://www.saucedemo.com/cart.html");
+  cy.get("[data-test=checkout]").click();
+};
+
 export const fillLogin = (name) => {
   cy.get("[data-test=username]").type(name);
   cy.get("[data-test=password]").type("secret_sauce");

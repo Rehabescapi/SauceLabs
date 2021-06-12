@@ -35,10 +35,10 @@ describe("Login with valid Credentials", () => {
 });
 
 describe("Invalid Login Flow", () => {
-  it.only("User cannot log in", () => {
+  it.only("User cannot log in with bad Password", () => {
     cy.visit("https://www.saucedemo.com/");
     cy.get("[data-test=username]").type("performance_glitch_user");
-    cy.get("[data-test=password]").type("secret_sauceS");
+    cy.get("[data-test=password]").type("password1");
     cy.get("[data-test=login-button]").click();
 
     cy.get("[data-test=error]")
@@ -48,7 +48,7 @@ describe("Invalid Login Flow", () => {
       );
   });
 
-  it.only("User is locked out log in", () => {
+  it.only("User is locked out account while logging in", () => {
     cy.visit("https://www.saucedemo.com/");
     cy.get("[data-test=username]").type("locked_out_user");
     cy.get("[data-test=password]").type("secret_sauce");
