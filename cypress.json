@@ -1,5 +1,6 @@
 {
     "baseURL": "https://saucedemo.com",
-    "chromeWebSecurity": false
+    "chromeWebSecurity": false,
+    "video": false
 }
 
